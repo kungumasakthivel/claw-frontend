@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 import './Register.css'
 
 const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const nav = useNavigate();
 
     const register = async() => {
+        setLoading(true);
         let item = {name, email, password}
         console.warn(item)
 
@@ -20,10 +24,18 @@ const Register = () => {
         })
         result = await result.json()
         console.warn(result)
+        localStorage.setItem('user-info', JSON.stringify(result))
+        if(result.status === 1) {
+            nav('/login')
+        } else if(result.status === 0) {
+            alert(result.message)
+        }
+        setLoading(false)
     } 
 
   return (
     <div className='register-container'>
+      {loading ? <p>Loading...</p>: null}
       <h1>Register Page</h1>
       <input type="text" value={name} 
         placeholder='Name'

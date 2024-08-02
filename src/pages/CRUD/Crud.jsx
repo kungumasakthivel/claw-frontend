@@ -1,10 +1,9 @@
 import React from 'react'
-import './Crud.css'
 
 const Crud = () => {
   return (
-    <div>
-      
+    <div className='crud-container'>
+      <h1>Create Read Update Delete</h1>
     </div>
   )
 }
