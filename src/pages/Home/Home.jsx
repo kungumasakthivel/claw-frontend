@@ -3,6 +3,7 @@ import './Home.css'
 import Weather from '../Weather/Weather'
 import Crud from '../CRUD/Crud'
 import { useNavigate } from 'react-router-dom'
+import Logout from '../../components/Logout'
 
 // eslint-disable-next-line react/prop-types
 function HomeEle({display}) {
@@ -53,11 +54,16 @@ const Home = () => {
     const token = localStorage.getItem('token');
     if (token) {
       verifyToken(token);
+    } else if(token === null) {
+        nav('/login');
     }
   }, []);
   
   return (
-    <HomeEle display={isAuth} />
+    <>
+        <Logout />
+        <HomeEle display={isAuth} />
+    </>
   )
 }
 

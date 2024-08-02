@@ -7,7 +7,7 @@ const WeatherInfo = ({data}) => {
     const c = data.temp_c;
     const f = data.temp_f;
   return (
-    <div>
+    <div style={{marginTop: '10px'}}>
       <p>C&deg; / F&deg; : {c} / {f}</p>
     </div>
   )
