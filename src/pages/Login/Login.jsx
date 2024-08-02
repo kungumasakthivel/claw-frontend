@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Login.css'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -47,6 +47,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
         className="input"
       />
+      <Link to='/'>New User Register</Link>
       <button className="button" onClick={login} >Login</button>
     </div>
   )

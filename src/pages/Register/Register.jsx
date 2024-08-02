@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import './Register.css'
 
 const Register = () => {
@@ -52,6 +52,7 @@ const Register = () => {
         onChange={(e) => setPassword(e.target.value)}
         className="input"
       />
+      <Link to='/login'>Already have account?</Link>
       <button className="button" onClick={register} >Register</button>
     </div>
   )
