@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './Crud.css'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import ShowNotes from '../../components/ShowNotes'
 
 const Crud = () => {
   const [title, setTitle] = useState('')
@@ -51,6 +52,7 @@ const Crud = () => {
         />
         <button className='button' onClick={addNote}>Add</button>
       </div>
+      <ShowNotes />
     </div>
   )
 }
