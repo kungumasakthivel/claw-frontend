@@ -1,0 +1,11 @@
+[[redirects]]
+from = "/"
+to = "/"
+
+[[redirects]]
+from = "/home"
+to = "/home"
+
+[[redirects]]
+from = "/login"
+to = "/login"
