@@ -25,3 +25,21 @@
     align-items: center;
     gap: 10px;
 }
+
+table,
+th,
+td {
+    border: black 1px solid;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 2px;
+}
+
+td {
+    overflow: auto;
+    width: 40px;
+}
+
+th {
+    width: 40px;
+}

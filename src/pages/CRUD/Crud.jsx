@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react'
 import './Crud.css'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import ShowNotes from '../../components/ShowNotes'
+// import ShowNotes from '../../components/ShowNotes'
 
 const Crud = () => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
+  const [data, setData] = useState(null);
+  // const [appLoad, setAppLoad] = useState(false);
   const nav = useNavigate()
   
   // post method 
@@ -35,8 +37,48 @@ const Crud = () => {
     } else if(status === 0) {
       toast.error("Please enter a valid data");
     }
-    
+    window.location.reload()
   }
+
+  //
+  useEffect(() => {
+        const token = localStorage.getItem('token')
+
+        if(!token) {
+            nav('/login');
+        }
+
+        const getNotes = async() => {
+            const result = await fetch('https://claw-backend-hrmw.onrender.com/crud/', {
+                method: 'GET',
+                headers: {
+                    "Authorization": token,
+                }
+            })
+            setData('');
+            const responce = await result.json();
+            const data = await responce.data;
+            console.log(typeof data);
+            setData(data);
+        }
+        getNotes();
+    }, [])
+
+    // delete notes
+    const deleteNote = async(objId) => {
+        console.log('objId',objId)
+        const token = localStorage.getItem('token')
+        const result = await fetch('https://claw-backend-hrmw.onrender.com/crud/', {
+            method: 'DELETE',
+            headers: {
+                "Authorization": token,
+                "id": objId
+            }
+        })
+        const responce = await result.json();
+        console.log('delete', responce)
+        toast.warn('delete')
+    }
 
   return (
     <div className='crud-container'>
@@ -52,7 +94,24 @@ const Crud = () => {
         />
         <button className='button' onClick={addNote}>Add</button>
       </div>
-      <ShowNotes />
+      <div>
+          <h1>Notes</h1>
+          <table>
+            <thead>
+                <th>TITLE</th>
+                <th>BODY</th>
+            </thead>
+            <tbody className='t-daya'>
+                {data && data.map(d => (
+                    <tr key={d._id}>
+                        <td>{d.title}</td>
+                        <td>{d.body}</td>
+                        <button onClick={() => deleteNote(d._id)}>Delete</button>
+                    </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
     </div>
   )
 }
