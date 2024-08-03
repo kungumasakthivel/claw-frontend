@@ -34,10 +34,12 @@ const Crud = () => {
       toast.success("Created successfully");
       setTitle('');
       setBody('');
+      setTimeout(() => (
+        window.location.reload()
+      ), 1000)
     } else if(status === 0) {
       toast.error("Please enter a valid data");
     }
-    window.location.reload()
   }
 
   //
@@ -58,7 +60,7 @@ const Crud = () => {
             setData('');
             const responce = await result.json();
             const data = await responce.data;
-            console.log(typeof data);
+            // console.log(typeof data);
             setData(data);
         }
         getNotes();
@@ -77,7 +79,14 @@ const Crud = () => {
         })
         const responce = await result.json();
         console.log('delete', responce)
-        toast.warn('delete')
+        if(responce.status === 1) {
+          toast.success('Deleted successfully')
+          setTimeout(() => (
+            window.location.reload()
+          ), 1000)
+        } else {
+          toast.warn('Something went wrong!')
+        }
     }
 
   return (
@@ -98,8 +107,11 @@ const Crud = () => {
           <h1>Notes</h1>
           <table>
             <thead>
+              <tr>
                 <th>TITLE</th>
                 <th>BODY</th>
+                <th>Delete Button</th>
+              </tr>
             </thead>
             <tbody className='t-daya'>
                 {data && data.map(d => (

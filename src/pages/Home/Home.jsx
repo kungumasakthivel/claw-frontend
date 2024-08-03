@@ -14,7 +14,6 @@ function HomeEle({display}) {
             <div className="body-container">
                 <Weather/>
                 <Crud />
-                {console.log('HomeEle')}
             </div>
             </div>
         )
@@ -35,7 +34,7 @@ const Home = () => {
                 }
             })
             const responce = await result.json();
-            console.log(responce);
+            // console.log(responce);
             if(responce.message === 'jwt must be provided') {
                 nav('/login');
             }
